@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+            color: #333;
+            line-height: 1.6;
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 10px 10px;
+        }
+
+        header h1 {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.4s ease;
+        }
+
+        nav a:hover {
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form Containers */
+        .container {
+            width: 50%;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #3e8e41;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Elements */
+        input[type="email"], 
+        input[type="password"], 
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 2px solid #ebdfdf;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="email"]:focus, 
+        input[type="password"]:focus {
+            border-color: #3e8e41;
+            outline: none;
+            box-shadow: 0 0 8px rgba(62, 142, 65, 0.5);
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #36b336, #3e8e41);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Flash Messages */
+        .flash-message {
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .flash-message.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .flash-message.error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            nav a {
+                padding: 10px;
+                margin: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Login to Your Account</h1>
+</header>
+
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('create_account') }}">Create Account</a>
+</nav>
+
+<div class="container">
+    <h2>Login Form</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
+        <label for="pin">PIN:</label>
+        <input type="password" name="pin" required>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Bank System</p>
+</footer>
+
+</body>
+</html>
+

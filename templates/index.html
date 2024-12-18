@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank System</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #f8f9fc, #e0eafc);
+            color: #333;
+            line-height: 1.6;
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 10px 10px;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container */
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            nav a {
+                margin: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to the Bank System</h1>
+</header>
+
+<nav>
+    <a href="{{ url_for('create_account') }}">Create Account</a>
+    <a href="{{ url_for('login') }}">Login</a>
+</nav>
+
+<div class="container">
+    <h2>Manage your bank account</h2>
+    <p>Choose an option from the navigation bar above.</p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Bank System</p>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container */
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #3e8e41;
+            margin-bottom: 20px;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="password"]:focus {
+            border-color: #3e8e41;
+            box-shadow: 0 0 8px rgba(62, 142, 65, 0.5);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(to right, #3e8e41, #36b336);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #36b336, #3e8e41);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Flash Messages */
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            nav a {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Create Your Account</h1>
+</header>
+
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('login') }}">Login</a>
+</nav>
+
+<div class="container">
+    <h2>Account Creation Form</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="name">Full Name:</label>
+        <input type="text" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+        
+        <label for="contact_number">Contact Number:</label>
+        <input type="number" name="contact_number">
+        
+        <label for="city">City:</label>
+        <input type="text" name="city" required>
+        
+        <label for="state">State:</label>
+        <input type="text" name="state" required>
+        
+        <label for="initial_deposit">Initial Deposit:</label>
+        <input type="number" name="initial_deposit" required>
+        
+        <label for="pin">PIN:</label>
+        <input type="password" name="pin" required>
+        
+        <input type="submit" value="Create Account">
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Bank System</p>
+</footer>
+
+</body>
+</html>
+
+
